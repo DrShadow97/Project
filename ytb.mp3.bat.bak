@@ -1,0 +1,10 @@
+@echo off
+title Descargar de Youtube
+if ""=="%~1" (
+	:again
+	set linkytb=""
+	set /p linkytb="Pegue el link aqui: "
+	if "%linkytb%"=="exit" (goto :eof)
+) else ( set "linkytb=%~1" )
+C:\Project\bin\youtube-dl --no-resize-buffer -x --audio-format "mp3" -c -i -f best -o "%%(title)s.%%(ext)s" "%linkytb%"
+goto :again
