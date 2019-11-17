@@ -1,13 +1,14 @@
 @echo off
 color 0a
-
+mode con cols=33 lines=6
 C:\Project\bin\adb shell rm -f -rR "/sdcard/DCIM/.thumbnails" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Animated Gifs/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Video/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Images/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Audio/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Documents/Sent" >NUL
-echo Moviendo archivos del celular ...
+
+echo Moviendo archivos del celular...
 start "adbCelu" /min C:\Project\bin\adb -a pull "/sdcard/download" "%userprofile%\Celu\download"
 start "adbCelu" /min C:\Project\bin\adb -a pull "/sdcard/Pictures" "%userprofile%\Celu\Pictures"
 start "adbCelu" /min C:\Project\bin\adb -a pull "/sdcard/DCIM" "%userprofile%\Celu\DCIM"
@@ -30,7 +31,9 @@ for /f %%a in ('tasklist /fi "windowtitle eq adbCelu"') do (
 )
 taskkill /f /im adb.exe >NUL
 
-echo Eliminando duplicados  ...
+echo Ya puede desconectar el celular
+
+echo Eliminando duplicados ...
 start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\Pictures" -a C:\Project\settings.cst -e
 start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\download" -a C:\Project\settings.cst -e
 start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\WhatsApp\Media" -a C:\Project\settings.cst -e
@@ -50,8 +53,7 @@ echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.mp4" "%userp
 echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.jpg" "%userprofile%\Celu\Telegram\Telegram Images" > NUL
 echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.png" "%userprofile%\Celu\Telegram\Telegram Images" > NUL
 
-echo Ordenando por fecha ...
-
+echo Ordenando por fecha...
 start /min dateSorting "%userprofile%\Celu\WhatsApp\Media\.Statuses"
 start /min dateSorting "%userprofile%\Celu\WhatsApp\Media\WhatsApp Animated Gifs"
 start /min dateSorting "%userprofile%\Celu\WhatsApp\Media\WhatsApp Video"
