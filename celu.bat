@@ -1,6 +1,6 @@
 @echo off
 color 0a
-mode con cols=35 lines=6
+mode con cols=34 lines=7
 C:\Project\bin\adb shell rm -f -rR "/sdcard/DCIM/.thumbnails" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Animated Gifs/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Video/Sent" >NUL
@@ -8,6 +8,7 @@ C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Images/Sent"
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Audio/Sent" >NUL
 C:\Project\bin\adb shell rm -f -rR "/sdcard/WhatsApp/Media/WhatsApp Documents/Sent" >NUL
 
+echo __________________________________
 echo  Moviendo archivos del celular...
 start "adbCelu" /min C:\Project\bin\adb -a pull "/sdcard/download" "%userprofile%\Celu\download"
 start "adbCelu" /min C:\Project\bin\adb -a pull "/sdcard/Pictures" "%userprofile%\Celu\Pictures"
@@ -34,24 +35,19 @@ taskkill /f /im adb.exe >NUL
 echo  Ya puede desconectar el celular
 
 echo  Eliminando duplicados...
-start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\Pictures" -a C:\Project\settings.cst -e
-start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\download" -a C:\Project\settings.cst -e
 start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\WhatsApp\Media" -a C:\Project\settings.cst -e
+	timeout /nobreak /t 5 >NUL
 start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\Telegram" -a C:\Project\settings.cst -e
+	timeout /nobreak /t 5 >NUL
+start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\Pictures" -a C:\Project\settings.cst -e
+	timeout /nobreak /t 5 >NUL
+start /min C:\CloneSpy\CloneSpy64 -p1 "%userprofile%\Celu\download" -a C:\Project\settings.cst -e
 
 :waitCloneSpy
 for /f %%a in ('tasklist /fi "imagename eq CloneSpy64.exe"') do (
 	timeout /nobreak /t 1 >NUL
 	if "%%a"=="CloneSpy64.exe" (goto :waitCloneSpy)
 )
-
-echo n | move /-y "%userprofile%\Celu\WhatsApp\Media\WhatsApp Documents\*.mp4" "%userprofile%\Celu\WhatsApp\Media\WhatsApp Video" > NUL
-echo n | move /-y "%userprofile%\Celu\WhatsApp\Media\WhatsApp Documents\*.jpg" "%userprofile%\Celu\WhatsApp\Media\WhatsApp Images" > NUL
-echo n | move /-y "%userprofile%\Celu\WhatsApp\Media\WhatsApp Documents\*.png" "%userprofile%\Celu\WhatsApp\Media\WhatsApp Images" > NUL
-echo n | move /-y "%userprofile%\Celu\WhatsApp\Media\WhatsApp Documents\*.gif" "%userprofile%\Celu\WhatsApp\Media\WhatsApp Animated Gifs" > NUL
-echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.mp4" "%userprofile%\Celu\Telegram\Telegram Video" > NUL
-echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.jpg" "%userprofile%\Celu\Telegram\Telegram Images" > NUL
-echo n | move /-y "%userprofile%\Celu\Telegram\Telegram Documents\*.png" "%userprofile%\Celu\Telegram\Telegram Images" > NUL
 
 echo  Ordenando por fecha...
 start /min dateSorting "%userprofile%\Celu\WhatsApp\Media\.Statuses"
