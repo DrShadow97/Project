@@ -1,4 +1,4 @@
-@echo on
+@echo off
 title Descargar de Mediafire
 set wget=C:\Project\bin\wget.exe
 if exist "%tmp%\Mediafire.html" (del "%tmp%\Mediafire.html")
