@@ -2,9 +2,10 @@
 title Descargar de Mega
 set "client=%localappdata%\MEGAcmd\"
 
-if ""=="%~1" (
-	echo 
-) else (
-	start /min %client%mega-get --ignore-quota-warn %~1
-	goto :eof
+if not ""=="%~1" (
+	if "%~1"=="-b" (
+		start /min %client%MegaClient.exe get --ignore-quota-warn %~2
+	) else (
+		call %client%mega-get --ignore-quota-warn %~1
+	)
 )

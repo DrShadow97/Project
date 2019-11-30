@@ -5,6 +5,8 @@ set ffplay=C:\Project\bin\ffplay
 for %%F in ("%~1") do (
 	set "title=%%~nF"
 	if "%%~xF"==".gif" (goto :gif)
+	if "%%~xF"==".wav" (goto :music)
+	if "%%~xF"==".mid" (goto :music)
 	if "%%~xF"==".mp3" (goto :music)
 	if "%%~xF"==".opus" (goto :music)
 	if "%%~xF"==".3gp" (goto :video)

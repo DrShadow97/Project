@@ -3,20 +3,17 @@ title Descargar de Mediafire
 set wget=C:\Project\bin\wget.exe
 if exist "%tmp%\Mediafire.html" (del "%tmp%\Mediafire.html")
 if exist "%tmp%\Mediafire.tmp" (del "%tmp%\Mediafire.tmp")
-if "%~1"=="" (
-	echo 
-) else (
+if not "%~1"=="" (
 	if "%~1"=="-b" (
 		set background=1
 		set "linkMediafire=%~2"
-		call :download
-		goto :eof
+	) else (
+		set background=0
+		set "linkMediafire=%~1"
 	)
-	set background=0
-	set "linkMediafire=%~1"
 	call :download
-	goto :eof
 )
+goto :eof
 
 :download
 %wget% -c -nc -q -O %tmp%\Mediafire.html "%linkMediafire%"
